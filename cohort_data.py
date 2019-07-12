@@ -51,8 +51,37 @@ def sort_by_cohort(filename):
     fall_15 = []
     ghosts = []
 
-    # Code goes here
+    # open file
+    cohort_file = open(filename)
+    # iterate thru all people, full_name = concat first + last name
+    for line in cohort_file:
+        wizard_info = line.rstrip().split("|")
+        full_name = " ".join(wizard_info[:2])
 
+    # check their cohort, if x cohort full_name add to x list
+        if wizard_info[4] == 'Winter 2016':
+            winter_16.append(full_name)
+
+        elif wizard_info[4] == 'Spring 2016':
+            spring_16.append(full_name)
+
+        elif wizard_info[4] == 'Summer 2016':
+            summer_16.append(full_name)
+
+        elif wizard_info[4] == 'Fall 2015':
+            fall_15.append(full_name)
+
+        elif wizard_info[4] == 'G':
+            ghosts.append(full_name)
+
+    all_students.append(fall_15)
+    all_students.append(winter_16)
+    all_students.append(spring_16)
+    all_students.append(summer_16)
+    all_students.append(ghosts)
+
+    # close file
+    cohort_file.close()
     return all_students
 
 
@@ -196,9 +225,9 @@ def find_house_members_by_student_name(student_list):
 
 
 
-# if __name__ == "__main__":
-#     import doctest
+if __name__ == "__main__":
+    import doctest
 
-#     result = doctest.testmod()
-#     if result.failed == 0:
-#         print("ALL TESTS PASSED")
+    result = doctest.testmod()
+    if result.failed == 0:
+        print("ALL TESTS PASSED")
