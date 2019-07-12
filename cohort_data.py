@@ -132,6 +132,8 @@ def hogwarts_by_house(filename):
             else:
                 slytherin.append(last_name)
 
+    cohort_file.close()
+
     return [sorted(dumbledores_army), sorted(gryffindor), sorted(hufflepuff), 
             sorted(ravenclaw), sorted(slytherin), sorted(ghosts), 
             sorted(instructors)]
@@ -152,7 +154,19 @@ def all_students_tuple_list(filename):
 
     student_list = []
 
-    # Code goes here
+    # open file
+    cohort_file = open(filename)
+
+    # for line in file, strip, split, set variable names
+    for line in cohort_file:
+        first_name, last_name, house, advisor, cohort = line.rstrip().split("|")
+     
+        # check if student, combine full name, add tuple to list
+        if house != "":
+            student_list.append((f"{first_name} {last_name}", house, advisor, cohort))
+       
+    # close file
+    cohort_file.close()
 
     return student_list
 
