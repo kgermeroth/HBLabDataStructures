@@ -1,6 +1,5 @@
 """Functions to parse a file containing student data."""
 
-
 def unique_houses(filename):
     """TODO: Return a set of student houses.
 
@@ -77,12 +76,6 @@ def sort_by_cohort(filename):
         elif cohort == 'G':
             ghosts.append(full_name)
 
-    # all_students.append(fall_15)
-    # all_students.append(winter_16)
-    # all_students.append(spring_16)
-    # all_students.append(summer_16)
-    # all_students.append(ghosts)
-
     # close file
     cohort_file.close()
 
@@ -103,7 +96,7 @@ def hogwarts_by_house(filename):
 
     """
 
-    all_hogwarts = []
+    # all_hogwarts = []
     dumbledores_army = []
     gryffindor = []
     hufflepuff = []
@@ -112,9 +105,36 @@ def hogwarts_by_house(filename):
     ghosts = []
     instructors = []
 
-    # Code goes here
+    # open file
+    cohort_file = open(filename)
 
-    return all_hogwarts
+    # iterate through each line, strip, split, and assign all needed variables
+    # cohort can be grad class, ghost, or instructor
+    for line in cohort_file:
+        first_name, last_name, house, advisor, cohort = line.rstrip().split("|")
+    
+        # check for "house"
+        # if there is no house, then it is a ghost or instructor:
+        if house == "":
+            if cohort == "I":
+                instructors.append(last_name)
+            else:
+                ghosts.append(last_name)
+        else:
+            if house == "Dumbledore's Army":
+                dumbledores_army.append(last_name)
+            elif house == "Gryffindor":
+                gryffindor.append(last_name)
+            elif house == "Hufflepuff":
+                hufflepuff.append(last_name)
+            elif house == "Ravenclaw":
+                ravenclaw.append(last_name)
+            else:
+                slytherin.append(last_name)
+
+    return [sorted(dumbledores_army), sorted(gryffindor), sorted(hufflepuff), 
+            sorted(ravenclaw), sorted(slytherin), sorted(ghosts), 
+            sorted(instructors)]
 
 
 def all_students_tuple_list(filename):
