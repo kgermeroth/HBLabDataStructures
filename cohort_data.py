@@ -16,7 +16,16 @@ def unique_houses(filename):
 
     houses = set()
 
-    # Code goes here
+    # open file and save to variable
+    cohort_file = open(filename)
+    # loop through each line of file and split (will create a list), clean up white space
+    # add house to set (house is index 2)
+
+    houses = {line.rstrip().split("|")[2] for line in cohort_file 
+                if line.rstrip().split("|")[2] != ""}
+
+    # close file
+    cohort_file.close()
 
     return houses
 
@@ -187,9 +196,9 @@ def find_house_members_by_student_name(student_list):
 
 
 
-if __name__ == "__main__":
-    import doctest
+# if __name__ == "__main__":
+#     import doctest
 
-    result = doctest.testmod()
-    if result.failed == 0:
-        print("ALL TESTS PASSED")
+#     result = doctest.testmod()
+#     if result.failed == 0:
+#         print("ALL TESTS PASSED")
