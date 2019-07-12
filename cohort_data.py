@@ -21,8 +21,11 @@ def unique_houses(filename):
     # loop through each line of file and split (will create a list), clean up white space
     # add house to set (house is index 2)
 
-    houses = {line.rstrip().split("|")[2] for line in cohort_file 
-                if line.rstrip().split("|")[2] != ""}
+    houses = {
+        line.rstrip().split("|")[2]
+        for line in cohort_file 
+        if line.rstrip().split("|")[2] != ""
+        }
 
     # close file
     cohort_file.close()
@@ -55,34 +58,35 @@ def sort_by_cohort(filename):
     cohort_file = open(filename)
     # iterate thru all people, full_name = concat first + last name
     for line in cohort_file:
-        wizard_info = line.rstrip().split("|")
-        full_name = " ".join(wizard_info[:2])
+        first_name, last_name, *_, cohort = line.rstrip().split("|")
+        full_name = f"{first_name} {last_name}"
 
     # check their cohort, if x cohort full_name add to x list
-        if wizard_info[4] == 'Winter 2016':
+        if cohort == 'Winter 2016':
             winter_16.append(full_name)
 
-        elif wizard_info[4] == 'Spring 2016':
+        elif cohort == 'Spring 2016':
             spring_16.append(full_name)
 
-        elif wizard_info[4] == 'Summer 2016':
+        elif cohort == 'Summer 2016':
             summer_16.append(full_name)
 
-        elif wizard_info[4] == 'Fall 2015':
+        elif cohort == 'Fall 2015':
             fall_15.append(full_name)
 
-        elif wizard_info[4] == 'G':
+        elif cohort == 'G':
             ghosts.append(full_name)
 
-    all_students.append(fall_15)
-    all_students.append(winter_16)
-    all_students.append(spring_16)
-    all_students.append(summer_16)
-    all_students.append(ghosts)
+    # all_students.append(fall_15)
+    # all_students.append(winter_16)
+    # all_students.append(spring_16)
+    # all_students.append(summer_16)
+    # all_students.append(ghosts)
 
     # close file
     cohort_file.close()
-    return all_students
+
+    return [fall_15, winter_16, spring_16, summer_16, ghosts]
 
 
 def hogwarts_by_house(filename):
