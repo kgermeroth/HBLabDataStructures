@@ -207,9 +207,6 @@ def find_cohort_by_student_name():
             return "Student not found."
 
 
-
-
-
 ##########################################################################################
 # Further Study Questions
 
@@ -225,10 +222,35 @@ def find_name_duplicates(filename):
     {'Weasley'}
 
     """
+    winter_16 = set()
+    spring_16 = set()
+    summer_16 = set()
+    fall_15 = set()
 
-    duplicate_names = set()
+    # open file
+    cohort_file = open(filename)
 
-    # Code goes here
+    # loop over each line of the file and put the last names into the cohort set
+    for line in cohort_file:
+    	first_name, last_name, *house_advisor, cohort = line.rstrip().split("|")
+
+    	if cohort == "Winter 2016":
+    		winter_16.add(last_name)
+
+    	elif cohort == "Spring 2016":
+    		spring_16.add(last_name)
+
+    	elif cohort == "Summer 2016":
+    		summer_16.add(last_name)
+
+    	elif cohort == "Fall 2015":
+    		fall_15.add(last_name)
+
+    # look at the intersection of all the sets and add to the new set
+    duplicate_names = winter_16 & spring_16 & summer_16 & fall_15
+
+    # close file
+    cohort_file.close()
 
     return duplicate_names
 
