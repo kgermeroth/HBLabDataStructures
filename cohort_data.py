@@ -255,7 +255,7 @@ def find_name_duplicates(filename):
     return duplicate_names
 
 
-def find_house_members_by_student_name(student_list):
+def find_house_members_by_student_name():
     """TODO: Prompt user for a student. Display everyone in their house and cohort.
 
      Prompt the user for the name via the command line and when given a name,
@@ -281,7 +281,27 @@ def find_house_members_by_student_name(student_list):
 
      """
 
-    # Code goes here
+    # ask for name to search
+    student_to_search = input("Choose a student: ")
+
+    # run the function to get the list of students
+    student_list = all_students_tuple_list(sys.argv[1])
+
+    # loop through the list to find the given student and get the house and cohort
+    for student in student_list:
+    	if student[0] == student_to_search:
+    		student_house = student[1]
+    		student_cohort = student[3]
+
+    print(f"{student_to_search} was in house {student_house} in the {student_cohort} cohort.")
+    print(f"The follow students were also in {student_to_search}'s house:")
+
+    # loop through the list again and print the students that have the same house and cohort
+    for student in student_list:
+    	if student[0] == student_to_search:
+    		pass
+    	elif student[1] == student_house and student[3] == student_cohort:
+    		print(student[0])
 
     return
 
@@ -290,7 +310,7 @@ def find_house_members_by_student_name(student_list):
 # Here is some useful code to run these functions without doctests!
 
 # find_cohort_by_student_name(all_students_data)
-# find_house_members_by_student_name(all_students_data)
+find_house_members_by_student_name()
 
 
 ##############################################################################
